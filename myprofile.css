@@ -1,0 +1,58 @@
+/* Color Pallette
+--dark blue: #1D3557;
+--off white: #F1FAEE;
+--sky blue: #A8DADC;
+--water blue: #457B9D;
+--red: #E63946;
+*/
+
+/* Global Styles */
+
+img {
+  width: 300px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  color: #1d3557;
+  font-size: 15px;
+  line-height: 1.5;
+  font-family: Roboto;
+}
+
+.contentwrap {
+  width: 800px;
+  margin: 0 auto;
+}
+h1,
+h2 {
+  font-family: Satisfy;
+}
+h1 {
+  font-size: 75px;
+}
+h2 {
+  font-size: 35px;
+}
+/* Profile (Header) */
+header {
+  background-color: #1d3557;
+  color: #f1faee;
+  text-align: center;
+}
+/* Projects */
+.projects {
+  background-color: #f1faee;
+}
+/* Experience */
+.experience {
+  background-color: #a8dadc;
+}
+/* Education*/
+.education {
+  background-color: #457b9d;
+}
+/* Contact*/
+.contact {
+  background-color: #e63946;
+}
