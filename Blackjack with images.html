@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blackjack-Game</title>
+    <style>
+      body {
+        background: black;
+        background: linear-gradient(to top right, black, rgb(29, 29, 29)) fixed;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          Arial, sans-serif;
+        background-size: cover;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+      }
+
+      h1 {
+        margin-top: 7%;
+        font-size: 80px;
+        color: goldenrod;
+      }
+
+      #msg-El {
+        font-size: 30px;
+        font-style: italic;
+      }
+
+      button {
+        color: rgb(29, 29, 29);
+        width: 150px;
+        background: goldenrod;
+        padding: 5px 10px;
+        font-size: 25px;
+        font-weight: bold;
+        width: fit-content;
+        height: fit-content;
+        border: none;
+        border-radius: 2px;
+        margin: 20px 5px;
+      }
+      #cards-El,
+      #score-El {
+        text-align: center;
+        visibility: hidden;
+      }
+      #cards-El {
+        height: 194px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Blackjack</h1>
+    <p id="msg-El">Welcome To BlackJack</p>
+    <p id="cards-El"></p>
+    <p id="score-El">Score:</p>
+    <button onclick="startGame()" id="startBtn">Start Game</button>
+    <button onclick="newCard()" id="drawCardBtn">Draw Card</button>
+
+    <script>
+      let cards = [];
+      gameStart = false;
+
+      function startGame() {
+        if (gameStart == false) {
+          reset();
+          drawAndShowCard();
+          drawAndShowCard();
+          renderGame();
+        }
+      }
+
+      function newCard() {
+        if (gameStart == true) {
+          drawAndShowCard();
+          renderGame();
+        }
+      }
+
+      function renderGame() {
+        let cardsTotal = calcSum();
+        showScore(cardsTotal);
+        checkBlackJack(cardsTotal);
+      }
+
+      function checkBlackJack(cardsTotal) {
+        let msg =
+          cardsTotal > 21
+            ? "Bust! You are out."
+            : cardsTotal == 21
+            ? "BlackJack! You Win."
+            : "Want to draw a card?";
+        let msgEl = document.getElementById("msg-El");
+        msgEl.innerHTML = msg;
+        gameStart = cardsTotal >= 21 ? false : true;
+      }
+
+      function drawAndShowCard() {
+        let randomNumber = Math.floor(Math.random() * 13) + 1;
+        let cardNumber =
+          randomNumber == 1 ? 11 : randomNumber >= 10 ? 10 : randomNumber;
+        cards.push(cardNumber);
+
+        cardTypes = ["Spades", "Diamonds", "Hearts", "Clubs"];
+        let cardType = cardTypes[Math.floor(Math.random() * 4)];
+
+        let imageSrcOfCard = "Images/card-" + cardType + cardNumber + ".png";
+        let cardsImage = '<img src="' + imageSrcOfCard + '">';
+        let display = document.getElementById("cards-El");
+        display.innerHTML += cardsImage;
+        display.style.visibility = "visible";
+      }
+
+      function calcSum() {
+        let sum = 0;
+        cards.forEach((card) => (sum += card));
+        return sum;
+      }
+
+      function showScore(cardsTotal) {
+        let sumEl = document.getElementById("score-El");
+        sumEl.innerHTML = "Score: " + cardsTotal;
+        sumEl.style.visibility = "visible";
+      }
+
+      function reset() {
+        cards = [];
+        gameStart = true;
+        document.getElementById("cards-El").innerHTML = "";
+      }
+    </script>
+  </body>
+</html>
